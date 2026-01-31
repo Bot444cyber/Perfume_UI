@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Link from 'next/link';
 
 import { products } from '@/data/products';
+import { contactData } from '@/data/contact';
 
 const ProductDetail = () => {
     const params = useParams();
@@ -127,7 +128,7 @@ const ProductDetail = () => {
                                 <motion.a
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    href={`mailto:contact@karfragrance.com?subject=Inquiry about ${product.name}`}
+                                    href={`${contactData.find(c => c.title === 'Email')?.href}?subject=Inquiry about ${product.name}`}
                                     className="group flex-1 h-12 md:h-14 bg-white text-black flex items-center justify-center gap-3 font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs rounded-full shadow-lg shadow-white/5 hover:bg-[#D4AF37] hover:shadow-[#D4AF37]/20 transition-all duration-500"
                                 >
                                     <span>Contact Concierge</span>
@@ -136,11 +137,11 @@ const ProductDetail = () => {
                                 <motion.a
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    href="tel:+15550000000"
+                                    href={contactData.find(c => c.title === 'Phone')?.href || '#'}
                                     className="md:w-auto h-12 md:h-14 px-8 border border-white/10 flex items-center justify-center gap-3 text-white hover:bg-white/5 transition-colors group rounded-full"
                                 >
                                     <Phone className="w-4 h-4 text-zinc-500 group-hover:text-[#D4AF37] transition-colors" />
-                                    <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-zinc-400 group-hover:text-white transition-colors">+1 (555) 000-0000</span>
+                                    <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-zinc-400 group-hover:text-white transition-colors">{contactData.find(c => c.title === 'Phone')?.value}</span>
                                 </motion.a>
                             </div>
                             <p className="text-[10px] text-zinc-600 uppercase tracking-widest text-center md:text-left mt-2">

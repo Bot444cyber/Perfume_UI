@@ -3,7 +3,6 @@ import { Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
-import AuthTokenHandler from "@/components/AuthTokenHandler";
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
@@ -30,9 +29,6 @@ export default function RootLayout({
         className={`${interTight.variable} font-sans antialiased`}
       >
         {children}
-        <Suspense fallback={null}>
-          <AuthTokenHandler />
-        </Suspense>
         <Toaster position="top-center" richColors />
       </body>
     </html>

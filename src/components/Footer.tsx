@@ -6,8 +6,11 @@ import { motion } from 'framer-motion';
 import { Instagram, Twitter, Facebook, ChevronUp } from 'lucide-react';
 import Link from 'next/link';
 
+import { contactData } from '@/data/contact';
+
 const Footer: React.FC = () => {
   const footerLinks = [
+
     {
       title: "Explore",
       links: [
@@ -109,7 +112,7 @@ const Footer: React.FC = () => {
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-3">
               <span className="opacity-50">Studio:</span>
-              <span className="text-white border-b border-[#D4AF37]/40 pb-0.5">Paris / Grasse</span>
+              <span className="text-white border-b border-[#D4AF37]/40 pb-0.5">{contactData.find(c => c.title === 'Address')?.value}</span>
             </div>
             {/* Optimized Brand Seal */}
             <motion.div

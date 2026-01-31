@@ -2,51 +2,25 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence, useScroll, useMotionValue, useSpring } from 'framer-motion';
-import { ChevronDown, Menu, X, Flame, Globe, ArrowRight, User, LogOut, LayoutDashboard } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Menu, X, Globe } from 'lucide-react';
 
 import MagneticButton from './MagneticButton';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    // Check for token to determine login state
-    const checkAuth = () => {
-      const token = localStorage.getItem('token');
-      setIsLoggedIn(!!token);
-    };
-
-    checkAuth();
-    // Listen for storage events in case login happens in another tab/window or via the AuthTokenHandler
-    window.addEventListener('storage', checkAuth);
-    // Listen for custom authChange event from AuthTokenHandler for same-tab updates
-    window.addEventListener('authChange', checkAuth);
-
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('storage', checkAuth);
-      window.removeEventListener('authChange', checkAuth);
     };
   }, []);
-
-  // Effect to check auth periodically or when location changes (if we had access to router/pathname here easily without causing hydration issues)
-  // For now, let's trust the mount check.
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-    window.dispatchEvent(new Event("authChange"));
-    window.location.href = '/login';
-  };
 
   const navLinks = [
     { name: 'Home', href: '/home' },
@@ -98,50 +72,11 @@ const Header: React.FC = () => {
             <ChevronDown className="w-3 h-3" />
           </button>
 
-          {isLoggedIn ? (
-            <div className="relative hidden md:block">
-              <button
-                onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-[#D4AF37] hover:bg-zinc-700 transition"
-              >
-                <User className="w-5 h-5" />
-              </button>
-
-              <AnimatePresence>
-                {showProfileMenu && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                    className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-xl shadow-xl overflow-hidden py-1"
-                  >
-                    <Link href="/profile" className="flex items-center gap-3 px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">
-                      <User className="w-4 h-4" />
-                      Profile
-                    </Link>
-                    <Link href="/dashboard" className="flex items-center gap-3 px-4 py-3 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors">
-                      <LayoutDashboard className="w-4 h-4" />
-                      Dashboard
-                    </Link>
-                    <div className="h-px bg-zinc-800 my-1" />
-                    <button
-                      onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Logout
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ) : (
-            <Link href="/contact" className="hidden md:block">
-              <MagneticButton primary>
-                Contact Now
-              </MagneticButton>
-            </Link>
-          )}
+          <Link href="/contact" className="hidden md:block">
+            <MagneticButton primary>
+              Contact Now
+            </MagneticButton>
+          </Link>
 
           <button
             className="lg:hidden p-2 text-zinc-300 hover:text-[#D4AF37] transition-colors"
@@ -204,19 +139,11 @@ const Header: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
               >
-                {isLoggedIn ? (
-                  <div className="flex flex-col gap-4">
-                    <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-white hover:text-[#D4AF37]">Profile</Link>
-                    <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-white hover:text-[#D4AF37]">Dashboard</Link>
-                    <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }} className="text-2xl font-bold text-red-500">Logout</button>
-                  </div>
-                ) : (
-                  <Link href="/contact">
-                    <MagneticButton primary className="mt-8 scale-125">
-                      Contact Now
-                    </MagneticButton>
-                  </Link>
-                )}
+                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                  <MagneticButton primary className="mt-8 scale-125">
+                    Contact Now
+                  </MagneticButton>
+                </Link>
               </motion.div>
             </div>
           </motion.div>
