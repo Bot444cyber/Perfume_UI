@@ -31,8 +31,8 @@ const MagneticButton: React.FC<{ children: React.ReactNode; className?: string; 
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             className={`relative group px-7 py-2.5 rounded-full text-xs font-black tracking-widest uppercase transition-all duration-300 active:scale-95 ${primary
-                ? "bg-linear-to-r from-teal-500 to-emerald-600 text-black shadow-lg shadow-teal-900/20"
-                : "bg-transparent border border-white/10 text-white hover:border-teal-500/50"
+                ? "bg-[#D4AF37] text-black shadow-lg shadow-[#D4AF37]/20 hover:bg-white"
+                : "bg-transparent border border-white/10 text-white hover:border-[#D4AF37]/50"
                 } ${className}`}
         >
             <span className="relative z-10 flex items-center justify-center gap-2">

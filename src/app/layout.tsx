@@ -1,25 +1,22 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Suspense } from "react";
 import AuthTokenHandler from "@/components/AuthTokenHandler";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta",
-  display: 'swap',
-});
-
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-inter-tight",
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "PureSmell | Luxury Fragrances",
+  title: "K.A.R Perfumes",
   description: "Luxury fragrances for the elite.",
+  icons: {
+    icon: '/image/site-icon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${plusJakartaSans.variable} ${playfairDisplay.variable} font-sans antialiased`}
+        className={`${interTight.variable} font-sans antialiased`}
       >
         {children}
         <Suspense fallback={null}>

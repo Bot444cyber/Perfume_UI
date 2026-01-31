@@ -48,14 +48,14 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
             onMouseMove={handleMouseMove}
             className="group relative glass p-8 rounded-[2.5rem] border border-white/5 bg-white/2 backdrop-blur-xl overflow-hidden"
         >
-            {/* Spotlight Gradient */}
+            {/* Spotlight Gradient - Gold */}
             <motion.div
                 className="pointer-events-none absolute -inset-px rounded-[2.5rem] opacity-0 transition duration-300 group-hover:opacity-100"
                 style={{
                     background: useMotionTemplate`
                         radial-gradient(
                           650px circle at ${mouseX}px ${mouseY}px,
-                          rgba(20, 184, 166, 0.15),
+                          rgba(212, 175, 55, 0.15),
                           transparent 80%
                         )
                       `,
@@ -67,20 +67,20 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
                     background: useMotionTemplate`
                         radial-gradient(
                           300px circle at ${mouseX}px ${mouseY}px,
-                          rgba(20, 184, 166, 0.1),
+                          rgba(212, 175, 55, 0.1),
                           transparent 80%
                         )
                       `,
-                    border: '1px solid rgba(20, 184, 166, 0.2)'
+                    border: '1px solid rgba(212, 175, 55, 0.2)'
                 }}
             />
 
 
             <div className="relative z-10">
-                <div className="w-14 h-14 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 mb-6 group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-black transition-all duration-500 shadow-lg shadow-teal-500/5 group-hover:shadow-teal-500/50">
+                <div className="w-14 h-14 bg-[#D4AF37]/10 rounded-2xl flex items-center justify-center text-[#D4AF37] mb-6 group-hover:scale-110 group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-500 shadow-lg shadow-[#D4AF37]/5 group-hover:shadow-[#D4AF37]/50">
                     {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-teal-200 transition-colors">{feature.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-3 tracking-tight group-hover:text-[#D4AF37] transition-colors">{feature.title}</h3>
                 <p className="text-zinc-500 text-sm leading-relaxed group-hover:text-zinc-400 transition-colors font-light">
                     {feature.description}
                 </p>
@@ -91,11 +91,11 @@ const FeatureCard = ({ feature, index }: { feature: any, index: number }) => {
 
 const Features: React.FC = () => {
     return (
-        <section className="py-24 relative overflow-hidden bg-[#0c0805]">
+        <section className="py-24 relative overflow-hidden bg-black">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-teal-500/5 blur-[120px] rounded-full" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/5 blur-[120px] rounded-full" />
+                <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-[#D4AF37]/5 blur-[120px] rounded-full" />
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-zinc-500/5 blur-[120px] rounded-full" />
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">

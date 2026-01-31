@@ -44,15 +44,15 @@ const MagneticButton: React.FC<{ children: React.ReactNode; className?: string; 
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             className={`relative group px-8 py-4 rounded-full text-[10px] font-black tracking-[0.2em] uppercase transition-all duration-300 active:scale-95 ${primary
-                ? "bg-teal-500 text-black hover:bg-teal-400"
-                : "bg-transparent border border-white/10 text-white hover:border-teal-500/50"
+                ? "bg-[#D4AF37] text-black hover:bg-white hover:text-black"
+                : "bg-transparent border border-white/10 text-white hover:border-[#D4AF37]/50"
                 } ${className}`}
         >
             <span className="relative z-10 flex items-center justify-center gap-3">
                 {children}
             </span>
             {primary && (
-                <div className="absolute inset-0 rounded-full bg-teal-400 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" />
+                <div className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" />
             )}
         </motion.button>
     );
@@ -91,8 +91,8 @@ const GlitchText: React.FC<{ text: string; delay?: number }> = ({ text, delay = 
             onMouseEnter={() => triggerGlitch()}
         >
             <span className="relative z-10">{displayText}</span>
-            <span className="absolute top-0 left-0 -z-10 text-teal-500 opacity-40 translate-x-[2px] translate-y-[-1px] select-none">{displayText}</span>
-            <span className="absolute top-0 left-0 -z-10 text-rose-500 opacity-40 -translate-x-[2px] translate-y-[1px] select-none">{displayText}</span>
+            <span className="absolute top-0 left-0 -z-10 text-[#D4AF37] opacity-40 translate-x-[2px] translate-y-[-1px] select-none">{displayText}</span>
+            <span className="absolute top-0 left-0 -z-10 text-zinc-500 opacity-40 -translate-x-[2px] translate-y-[1px] select-none">{displayText}</span>
         </span>
     );
 };
@@ -161,46 +161,29 @@ const Hero: React.FC = () => {
     const textParallax = useTransform(scrollYProgress, [0, 1], [0, 100]);
     const opacityFade = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-    const spotlightBackground = useMotionTemplate`
-        radial-gradient(
-            600px circle at ${mouseX}px ${mouseY}px,
-            rgba(20, 184, 166, 0.1),
-            transparent 80%
-        )
-    `;
-
     return (
         <section
             ref={sectionRef}
             onMouseMove={handleMouseMove}
-            className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#050505] selection:bg-teal-500 selection:text-black"
+            className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-black selection:bg-[#D4AF37] selection:text-black"
         >
             <Header />
 
-            {/* Dynamic Background Elements */}
-            <motion.div
-                className="absolute inset-0 z-0 pointer-events-none"
-                style={{ background: spotlightBackground }}
-            />
-
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(10,10,10,0)_0%,#050505_100%)] z-10" />
                 <motion.div
                     style={{ y: textParallax }}
-                    className="absolute inset-0 opacity-[0.08] blur-3xl scale-125"
+                    className="absolute inset-0 opacity-[0.2] grayscale"
                 >
                     <img
                         src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2560&auto=format&fit=crop"
-                        alt="Cinematic Forest"
+                        alt="Cinematic Background"
                         className="w-full h-full object-cover"
                     />
                 </motion.div>
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/40 to-[#050505]" />
+                <div className="absolute inset-0 bg-black/60" />
             </div>
 
-            <AmbientDust />
-
-            {/* Main Interactive Container - Scaled down for better fit */}
+            {/* Main Interactive Container */}
             <div className="max-w-screen-xl mx-auto w-full px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-16 relative z-10 pt-32 pb-24 lg:pt-40 lg:pb-32">
 
                 {/* Information Layer: Left */}
@@ -210,7 +193,7 @@ const Hero: React.FC = () => {
                 >
                     <div className="space-y-4">
                         <h1 className="text-6xl md:text-8xl xl:text-9xl font-black leading-[0.8] tracking-tighter text-white uppercase">
-                           By KAR
+                            By KAR
                         </h1>
                     </div>
 
@@ -221,9 +204,9 @@ const Hero: React.FC = () => {
                         className="max-w-md mx-auto lg:mx-0 space-y-4"
                     >
                         <p className="text-zinc-300 text-base lg:text-xl font-serif italic">
-                            Where obsidian silence meets the emerald roar.
+                            Where obsidian silence meets the golden roar.
                         </p>
-                        <p className="text-zinc-200 text-xs lg:text-sm leading-relaxed font-light border-l border-teal-500/50 pl-6 text-left">
+                        <p className="text-zinc-200 text-xs lg:text-sm leading-relaxed font-light border-l border-[#D4AF37]/50 pl-6 text-left">
                             A curated olfactory assault. Hand-poured into cold-pressed obsidian glass, By KAR represents the intersection of forgotten apothecary techniques and modern scent synthesis.
                         </p>
                     </motion.div>
@@ -235,12 +218,12 @@ const Hero: React.FC = () => {
                         className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2"
                     >
                         <Link href="/collections">
-                            <MagneticButton primary>
+                            <MagneticButton primary className="!bg-[#D4AF37] !text-black hover:!bg-white hover:!text-black">
                                 Secure Reserve <ArrowRight className="w-3.5 h-3.5" />
                             </MagneticButton>
                         </Link>
                         <Link href="/contact">
-                            <MagneticButton>
+                            <MagneticButton className="border-white/20 text-white hover:border-[#D4AF37]">
                                 Contact Us <ArrowRight className="w-3.5 h-3.5" />
                             </MagneticButton>
                         </Link>
@@ -250,16 +233,16 @@ const Hero: React.FC = () => {
                         <div className="flex -space-x-3">
                             {[1, 2, 3, 4].map((i) => (
                                 <div key={i} className="w-10 h-10 rounded-full border-2 border-black overflow-hidden bg-zinc-800 shadow-lg">
-                                    <img src={`https://picsum.photos/seed/${i + 25}/100/100`} alt="collector" className="w-full h-full object-cover" />
+                                    <img src={`https://picsum.photos/seed/${i + 25}/100/100`} alt="collector" className="w-full h-full object-cover grayscale" />
                                 </div>
                             ))}
-                            <div className="w-10 h-10 rounded-full border-2 border-black bg-teal-500 flex items-center justify-center text-[9px] font-black text-black shadow-lg">
+                            <div className="w-10 h-10 rounded-full border-2 border-black bg-[#D4AF37] flex items-center justify-center text-[9px] font-black text-black shadow-lg">
                                 +2k
                             </div>
                         </div>
                         <div className="text-left space-y-0.5">
                             <div className="flex gap-0.5">
-                                {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-2.5 h-2.5 fill-teal-500 text-teal-500" />)}
+                                {[1, 2, 3, 4, 5].map((s) => <Star key={s} className="w-2.5 h-2.5 fill-[#D4AF37] text-[#D4AF37]" />)}
                             </div>
                             <span className="text-[9px] text-zinc-500 uppercase tracking-[0.2em] font-black block">Collectors Verified</span>
                         </div>
@@ -280,10 +263,9 @@ const Hero: React.FC = () => {
                         <img
                             src="https://images.unsplash.com/photo-1541643600914-78b084683601?q=80&w=1000&auto=format&fit=crop"
                             alt="Brand Heritage"
-                            className="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000 ease-out"
+                            className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-80 group-hover:scale-110 transition-all duration-1000 ease-out"
                         />
-                        <div className="absolute inset-0 bg-teal-900/5 mix-blend-color" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-black/20 mix-blend-color" />
 
                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                             <div className="w-20 h-20 rounded-full bg-white/10 backdrop-blur-2xl flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-500">
@@ -292,7 +274,7 @@ const Hero: React.FC = () => {
                         </div>
 
                         <div className="absolute bottom-6 left-6 text-left">
-                            <span className="text-[9px] font-black text-teal-400 tracking-[0.3em] uppercase block mb-1">Cinéma Privé</span>
+                            <span className="text-[9px] font-black text-[#D4AF37] tracking-[0.3em] uppercase block mb-1">Cinéma Privé</span>
                             <p className="text-white text-lg font-black tracking-tighter">The Process of Void</p>
                             <div className="flex items-center gap-2 mt-2">
                                 <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
@@ -303,11 +285,11 @@ const Hero: React.FC = () => {
 
                     <div className="grid grid-cols-2 gap-px bg-white/5 w-full max-w-sm rounded-[1.2rem] overflow-hidden border border-white/10 shadow-xl">
                         <div className="bg-[#080808] p-6 space-y-1 text-center group">
-                            <span className="block text-4xl font-black text-white group-hover:text-teal-400 transition-colors">4.95</span>
+                            <span className="block text-4xl font-black text-white group-hover:text-[#D4AF37] transition-colors">4.95</span>
                             <span className="text-[9px] text-zinc-500 uppercase tracking-[0.2em] block font-black">Rating</span>
                         </div>
                         <div className="bg-[#080808] p-6 space-y-1 text-center group">
-                            <span className="block text-4xl font-black text-white group-hover:text-teal-400 transition-colors">24h+</span>
+                            <span className="block text-4xl font-black text-white group-hover:text-[#D4AF37] transition-colors">24h+</span>
                             <span className="text-[9px] text-zinc-500 uppercase tracking-[0.2em] block font-black">Longevity</span>
                         </div>
                         <div className="bg-[#080808] p-6 space-y-2 text-center group col-span-2">
@@ -336,8 +318,8 @@ const Hero: React.FC = () => {
                     </div>
                     <div className="flex flex-col gap-1">
                         <span className="text-[8px] font-black text-zinc-600 uppercase tracking-[0.3em]">Status</span>
-                        <span className="text-[10px] font-black text-teal-500 tracking-widest flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.6)]" />
+                        <span className="text-[10px] font-black text-[#D4AF37] tracking-widest flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.6)]" />
                             AVAILABLE
                         </span>
                     </div>
@@ -348,8 +330,8 @@ const Hero: React.FC = () => {
                     animate={{ y: [0, 8, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
-                    <span className="text-[8px] uppercase tracking-[0.4em] text-white/20 group-hover:text-teal-500 transition-colors duration-500">Explore</span>
-                    <div className="w-[px] h-12 bg-gradient-to-b from-white/0 via-teal-500/20 to-white/0 group-hover:via-teal-500 transition-all duration-700" />
+                    <span className="text-[8px] uppercase tracking-[0.4em] text-white/20 group-hover:text-[#D4AF37] transition-colors duration-500">Explore</span>
+                    <div className="w-[1px] h-12 bg-white/10 group-hover:bg-[#D4AF37] transition-all duration-700" />
                 </motion.div>
 
                 <div className="flex gap-10 items-center">
@@ -367,7 +349,7 @@ const Hero: React.FC = () => {
 
             {/* Scroll Progress Bar */}
             <motion.div
-                className="fixed bottom-0 left-0 h-1 bg-teal-500 z-[120] origin-left shadow-[0_0_10px_rgba(20,184,166,0.4)]"
+                className="fixed bottom-0 left-0 h-1 bg-[#D4AF37] z-[120] origin-left shadow-[0_0_10px_rgba(212,175,55,0.4)]"
                 style={{ scaleX: scrollYProgress }}
             />
         </section>

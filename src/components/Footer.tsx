@@ -31,10 +31,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#050505] pt-32 pb-12 border-t border-white/5 relative overflow-hidden">
-      {/* Dynamic Background Glows */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[1px] bg-gradient-to-r from-transparent via-teal-500/50 to-transparent blur-[1px]" />
-      <div className="absolute top-[-150px] left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-teal-500/10 blur-[120px] rounded-full opacity-40 pointer-events-none" />
+    <footer className="bg-black pt-32 pb-12 border-t border-white/5 relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-12 lg:gap-x-16 mb-24">
@@ -47,9 +44,14 @@ const Footer: React.FC = () => {
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <div className="group inline-block cursor-pointer" onClick={scrollToTop}>
-                <h2 className="text-7xl font-black text-white tracking-tighter mb-2 transition-transform duration-500 group-hover:-translate-y-1">KAR</h2>
-                <div className="h-1.5 w-full bg-teal-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+              <div className="group inline-flex cursor-pointer items-center gap-4" onClick={scrollToTop}>
+                <div className="w-24 h-24 rounded-full overflow-hidden transition-transform duration-500">
+                  <img src="/image/logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h2 className="text-5xl font-black text-white tracking-tighter mb-1 transition-transform duration-500 group-hover:-translate-y-1">K.A.R</h2>
+                  <div className="h-1 w-full bg-[#D4AF37] origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                </div>
               </div>
               <p className="text-zinc-500 text-sm md:text-base max-w-sm leading-relaxed font-medium">
                 Designing the future of olfactory art. A sanctuary for those who seek the sublime in the shadows of the sensory world.
@@ -70,7 +72,7 @@ const Footer: React.FC = () => {
               >
                 <div className="space-y-3">
                   <h3 className="text-white font-black uppercase tracking-[0.4em] text-[10px] opacity-50">{column.title}</h3>
-                  <div className="w-8 h-[1px] bg-teal-500/30" />
+                  <div className="w-8 h-[1px] bg-[#D4AF37]/30" />
                 </div>
                 <ul className="space-y-4">
                   {column.links.map((link, linkIdx) => (
@@ -83,7 +85,7 @@ const Footer: React.FC = () => {
                           <span className="inline-block group-hover:-translate-y-full transition-transform duration-300">
                             {link.name}
                           </span>
-                          <span className="absolute left-0 top-full inline-block group-hover:-translate-y-full transition-transform duration-300 text-teal-400 italic">
+                          <span className="absolute left-0 top-full inline-block group-hover:-translate-y-full transition-transform duration-300 text-[#D4AF37] italic">
                             {link.name}
                           </span>
                         </span>
@@ -107,7 +109,7 @@ const Footer: React.FC = () => {
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-3">
               <span className="opacity-50">Studio:</span>
-              <span className="text-white border-b border-teal-500/40 pb-0.5">Paris / Grasse</span>
+              <span className="text-white border-b border-[#D4AF37]/40 pb-0.5">Paris / Grasse</span>
             </div>
             {/* Optimized Brand Seal */}
             <motion.div
@@ -126,18 +128,14 @@ const Footer: React.FC = () => {
             <motion.button
               onClick={scrollToTop}
               whileHover={{ y: -3 }}
-              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-zinc-400 hover:text-teal-400 hover:border-teal-400/30 transition-all"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-zinc-400 hover:text-[#D4AF37] hover:border-[#D4AF37]/30 transition-all"
             >
               <ChevronUp size={16} />
             </motion.button>
           </div>
         </div>
       </div>
-
-      {/* Aesthetic Background Detail */}
-      <div className="absolute bottom-[-150px] left-[-150px] w-[500px] h-[500px] bg-teal-900/5 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-100px] right-[-100px] w-[400px] h-[400px] bg-zinc-900/20 blur-[100px] rounded-full pointer-events-none" />
-    </footer>
+    </footer >
   );
 };
 

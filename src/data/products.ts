@@ -1,50 +1,66 @@
 export const products = [
     {
-        id: 1,
-        name: "Mystery Vial",
-        collection: "By KAR",
-        price: 85,
-        rating: 4.8,
-        reviews: 42,
-        tags: ["Best Seller", "New"],
-        image: "/image/10ml.jpeg",
-        description: "A concentrated essence of the void. This 10ml vial contains the pure spirit of the By KAR collection, perfect for travel or discovery.",
-        notes: {
-            top: "Cold Ash, Bergamot",
-            heart: "Black Musk, Violet",
-            base: "Cambodian Oud, Leather"
+        "id": 1,
+        "name": "Shadow Flame",
+        "collection": "By KAR",
+        "price": 120,
+        "rating": 4.9,
+        "reviews": 56,
+        "tags": ["Smoky", "Intense"],
+        "image": "/image/1st.jpeg",
+        "description": "Feel the flame, embrace the darkness. Shadow Flame is a bold, Extrait de Parfum that captures the primal dance between light and heat, designed for those who command presence.",
+        "notes": {
+            "top": "Smoky Incense",
+            "heart": "Warm Spices",
+            "base": "Dark Wood"
         }
     },
     {
-        id: 2,
-        name: "Ember Essence",
-        collection: "By KAR",
-        price: 45,
-        rating: 4.9,
-        reviews: 28,
-        tags: ["Limited"],
-        image: "/image/s1-1ml.jpeg",
-        description: "A spark in the dark. This 1ml sample offers a fleeting yet unforgettable glimpse into the By KAR collection. Intense, warm, and dangerous.",
-        notes: {
-            top: "Saffron, Spices",
-            heart: "Amber, Rose",
-            base: "Smoke, Vanilla"
+        "id": 3,
+        "name": "S.1",
+        "collection": "By KAR",
+        "price": 855,
+        "rating": 4.7,
+        "reviews": 28,
+        "tags": ["High-Performance", "Fresh"],
+        "image": "/image/2nd.jpeg",
+        "description": "Feel the power, embrace the elegance. S.1 is a high-performance blend designed for precision and impact, offering a crisp, sophisticated profile.",
+        "notes": {
+            "top": "Zesty Citrus",
+            "heart": "Cool Ambroxan",
+            "base": "Sharp Woods"
         }
     },
     {
-        id: 3,
-        name: "Abyss Walker",
-        collection: "By KAR",
-        price: 85,
-        rating: 5.0,
-        reviews: 15,
-        tags: ["Rare"],
-        image: "/image/10ml.jpeg",
-        description: "Deep, dark, and endless. Another facet of the By KAR collection, captured in a portable vessel for those who roam the night.",
-        notes: {
-            top: "Sea Salt, Ink",
-            heart: "Cedar, Iris",
-            base: "Vetiver, Dark Musk"
+        "id": 3,
+        "name": "ASEEL",
+        "collection": "By KAR",
+        "price": 300,
+        "rating": 4.9,
+        "reviews": 34,
+        "tags": ["Floral", "Traditional", "Rich"],
+        "image": "/image/3rd.jpeg",
+        "description": "Feel the power, embrace the elegance. ASEEL is a majestic composition that harmonizes traditional oriental depth with modern floral luxury.",
+        "notes": {
+            "top": "Velvety Rose",
+            "heart": "Pure Zafran",
+            "base": "Deep Oud"
         }
+    },
+    {
+    "id": 4,
+    "name": "WHITE OUD",
+    "collection": "By KAR",
+    "price": 85,
+    "rating": 4.8,
+    "reviews": 19,
+    "tags": ["Luxury", "Floral"],
+    "image": "/image/4th.jpeg",
+    "description": "Feel the power, embrace the elegance. White Oud is a masterful blend of liquid gold and powdery sweetness.",
+    "notes": {
+        "top": "Floral Sweetness",
+        "heart": "Powdery Musk",
+        "base": "Liquid Gold (Oud)"
     }
+}
 ];

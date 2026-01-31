@@ -69,13 +69,10 @@ const Header: React.FC = () => {
         {/* Brand/Logo */}
         <Link href="/">
           <div className="flex items-center gap-4 group cursor-pointer relative z-[920]">
-            <div className="w-10 h-10 bg-linear-to-br from-teal-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-teal-900/30 group-hover:rotate-[15deg] transition-transform duration-500">
-              <Flame className="w-5 h-5 text-black" />
+            <div className="w-16 h-16 rounded-full overflow-hidden group-hover:rotate-[5deg] transition-transform duration-500">
+              <img src="/image/logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
             </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-xl font-black tracking-tighter uppercase italic text-white group-hover:text-teal-400 transition-colors duration-500">KAR</span>
-              <span className="text-[9px] font-black tracking-[0.4em] text-zinc-500 uppercase group-hover:text-white transition-colors duration-500">Fragrance</span>
-            </div>
+            <span className="text-2xl font-black tracking-tighter uppercase italic text-white group-hover:text-[#D4AF37] transition-colors duration-500">K.A.R</span>
           </div>
         </Link>
 
@@ -88,7 +85,7 @@ const Header: React.FC = () => {
               className="text-[11px] font-black text-zinc-400 hover:text-white transition-all duration-500 tracking-[0.2em] uppercase relative group"
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-teal-500 transition-all duration-500 group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#D4AF37] transition-all duration-500 group-hover:w-full" />
             </Link>
           ))}
         </div>
@@ -105,7 +102,7 @@ const Header: React.FC = () => {
             <div className="relative hidden md:block">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-teal-400 hover:bg-zinc-700 transition"
+                className="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-[#D4AF37] hover:bg-zinc-700 transition"
               >
                 <User className="w-5 h-5" />
               </button>
@@ -147,7 +144,7 @@ const Header: React.FC = () => {
           )}
 
           <button
-            className="lg:hidden p-2 text-zinc-300 hover:text-teal-400 transition-colors"
+            className="lg:hidden p-2 text-zinc-300 hover:text-[#D4AF37] transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
@@ -165,7 +162,7 @@ const Header: React.FC = () => {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 bg-[#050505] z-[910] flex flex-col items-center justify-center lg:hidden pointer-events-auto"
           >
-            <div className="absolute top-1/4 left-1/4 w-full h-full bg-teal-500/10 blur-[200px] rounded-full -z-10" />
+            <div className="absolute top-1/4 left-1/4 w-full h-full bg-[#D4AF37]/10 blur-[200px] rounded-full -z-10" />
 
             <div className="flex flex-col items-center gap-10 text-center">
               {navLinks.map((link, i) => (
@@ -179,7 +176,7 @@ const Header: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + (i * 0.1) }}
-                    className="text-5xl font-black tracking-tighter text-white hover:text-teal-500 transition-colors block"
+                    className="text-5xl font-black tracking-tighter text-white hover:text-[#D4AF37] transition-colors block"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
@@ -209,8 +206,8 @@ const Header: React.FC = () => {
               >
                 {isLoggedIn ? (
                   <div className="flex flex-col gap-4">
-                    <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-white hover:text-teal-500">Profile</Link>
-                    <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-white hover:text-teal-500">Dashboard</Link>
+                    <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-white hover:text-[#D4AF37]">Profile</Link>
+                    <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold text-white hover:text-[#D4AF37]">Dashboard</Link>
                     <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }} className="text-2xl font-bold text-red-500">Logout</button>
                   </div>
                 ) : (
