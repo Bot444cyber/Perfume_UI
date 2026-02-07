@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, useRouter } from 'next/navigation';
-import { Star, Truck, ShieldCheck, Heart, Share2, MessageSquare, ArrowLeft, Phone, ArrowRight } from 'lucide-react';
+import { Star, Truck, ShieldCheck, Heart, Share2, MessageSquare, ArrowLeft, Phone, ArrowRight, Mail, MessageCircle } from 'lucide-react';
 import Header from '@/components/Header';
 import Link from 'next/link';
 
@@ -124,28 +124,54 @@ const ProductDetail = () => {
                                 Rs. {product.price}
                             </span>
 
-                            <div className="flex flex-col md:flex-row gap-4">
-                                <motion.a
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    href={`${contactData.find(c => c.title === 'Email')?.href}?subject=Inquiry about ${product.name}`}
-                                    className="group flex-1 h-12 md:h-14 bg-white text-black flex items-center justify-center gap-3 font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs rounded-full shadow-lg shadow-white/5 hover:bg-[#D4AF37] hover:shadow-[#D4AF37]/20 transition-all duration-500"
-                                >
-                                    <span>Contact Concierge</span>
-                                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                                </motion.a>
-                                <motion.a
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    href={contactData.find(c => c.title === 'Phone')?.href || '#'}
-                                    className="md:w-auto h-12 md:h-14 px-8 border border-white/10 flex items-center justify-center gap-3 text-white hover:bg-white/5 transition-colors group rounded-full"
-                                >
-                                    <Phone className="w-4 h-4 text-zinc-500 group-hover:text-[#D4AF37] transition-colors" />
-                                    <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-zinc-400 group-hover:text-white transition-colors">{contactData.find(c => c.title === 'Phone')?.value}</span>
-                                </motion.a>
+                            <div className="flex flex-col gap-4">
+                                {/* Desktop: Row, Mobile: Stack */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:flex gap-4">
+                                    {/* Email / Concierge */}
+                                    <motion.a
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        href={`${contactData.find(c => c.title === 'Email')?.href}?subject=Inquiry about ${product.name}`}
+                                        className="group flex-1 h-14 bg-white text-black flex items-center justify-center gap-3 font-bold uppercase tracking-[0.2em] text-xs rounded-full shadow-lg shadow-white/5 hover:bg-[#D4AF37] hover:shadow-[#D4AF37]/20 transition-all duration-500"
+                                    >
+                                        <div className="bg-black/5 p-2 rounded-full group-hover:bg-black/10 transition-colors">
+                                            <Mail className="w-4 h-4" />
+                                        </div>
+                                        <span>Concierge</span>
+                                        <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform opacity-50 group-hover:opacity-100" />
+                                    </motion.a>
+
+                                    {/* Phone */}
+                                    <motion.a
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        href={contactData.find(c => c.title === 'Phone')?.href || '#'}
+                                        className="flex-1 h-14 border border-white/10 flex items-center justify-center gap-3 text-white hover:bg-white/5 transition-colors group rounded-full bg-white/5 backdrop-blur-sm"
+                                    >
+                                        <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
+                                            <Phone className="w-4 h-4 text-[#D4AF37]" />
+                                        </div>
+                                        <span className="text-xs font-bold uppercase tracking-widest text-zinc-300 group-hover:text-white transition-colors">Call Now</span>
+                                    </motion.a>
+
+                                    {/* WhatsApp */}
+                                    <motion.a
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        href={`https://wa.me/92${contactData.find(c => c.title === 'Phone')?.value?.substring(1).replace(/\s+/g, '')}`}
+                                        className="flex-1 h-14 border border-[#25D366]/20 flex items-center justify-center gap-3 text-white hover:bg-[#25D366]/10 transition-colors group rounded-full bg-black"
+                                    >
+                                        <div className="p-2 rounded-full bg-[#25D366]/10 group-hover:bg-[#25D366]/20 transition-colors">
+                                            <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                                        </div>
+                                        <span className="text-xs font-bold uppercase tracking-widest text-zinc-300 group-hover:text-[#25D366] transition-colors">WhatsApp</span>
+                                    </motion.a>
+                                </div>
                             </div>
-                            <p className="text-[10px] text-zinc-600 uppercase tracking-widest text-center md:text-left mt-2">
-                                Available for private purchase only.
+
+                            <p className="text-[10px] text-zinc-600 uppercase tracking-widest text-center md:text-left mt-2 flex items-center gap-2 justify-center md:justify-start">
+                                <ShieldCheck className="w-3 h-3 text-[#D4AF37]" />
+                                Available for private purchase only
                             </p>
                         </div>
 
