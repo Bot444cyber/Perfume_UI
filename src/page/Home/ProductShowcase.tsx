@@ -8,7 +8,7 @@ import { products } from '@/data/products';
 
 
 
-const TiltCard = ({ product, index }: { product: any, index: number }) => {
+const TiltCard = ({ product, isBestSeller }: { product: any, isBestSeller: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const x = useMotionValue(0);
@@ -49,7 +49,7 @@ const TiltCard = ({ product, index }: { product: any, index: number }) => {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.15, duration: 0.8 }}
+      transition={{ duration: 0.8 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -72,6 +72,14 @@ const TiltCard = ({ product, index }: { product: any, index: number }) => {
         {/* Overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
         <div className="absolute inset-0 bg-[#D4AF37]/0 group-hover:bg-[#D4AF37]/10 transition-colors duration-700 mix-blend-overlay" />
+
+        {/* Best Seller Badge */}
+        {isBestSeller && (
+          <div className="absolute top-6 right-6 z-20 flex items-center gap-1 bg-[#D4AF37] text-black px-3 py-1 rounded-full shadow-lg shadow-[#D4AF37]/20" style={{ transform: "translateZ(35px)" }}>
+            <Star className="w-3 h-3 fill-black text-black" />
+            <span className="text-[10px] font-black uppercase tracking-wider">Most Selling</span>
+          </div>
+        )}
 
         <div className="absolute top-6 left-6 flex items-center gap-2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 group-hover:border-[#D4AF37]/30 transition-colors" style={{ transform: "translateZ(30px)" }}>
           <Star className="w-3 h-3 text-[#D4AF37] fill-current" />
@@ -99,6 +107,24 @@ const TiltCard = ({ product, index }: { product: any, index: number }) => {
 };
 
 const ProductShowcase: React.FC = () => {
+  const [activeTab, setActiveTab] = React.useState<'middle' | 'high'>('middle');
+
+  // Determine top 3 best sellers based on review count
+  const bestSellersIds = React.useMemo(() => {
+    return [...products]
+      .sort((a, b) => b.reviews - a.reviews)
+      .slice(0, 3)
+      .map(p => p.id);
+  }, []);
+
+  const displayedProducts = React.useMemo(() => {
+    if (activeTab === 'middle') {
+      return products.filter(p => p.price >= 500 && p.price <= 1000);
+    } else {
+      return products.filter(p => p.price > 1000);
+    }
+  }, [activeTab]);
+
   return (
     <section className="py-24 relative overflow-hidden bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
@@ -121,26 +147,45 @@ const ProductShowcase: React.FC = () => {
               THE <span className="text-[#D4AF37]">COLLECTIONS</span>
             </motion.h2>
           </div>
-          <Link href="/collections">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ x: 5 }}
-              className="flex items-center gap-3 text-white group font-bold tracking-[0.2em] text-sm uppercase hover:text-[#D4AF37] transition-colors cursor-pointer"
+
+          {/* Professional Tab Switcher */}
+          <div className="flex items-center gap-2 bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-sm">
+            <button
+              onClick={() => setActiveTab('middle')}
+              className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 ${activeTab === 'middle' ? 'bg-[#D4AF37] text-black shadow-lg shadow-[#D4AF37]/20' : 'text-zinc-400 hover:text-white'}`}
             >
-              View All <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform text-[#D4AF37]" />
-            </motion.div>
-          </Link>
+              Signature (₹500-1k)
+            </button>
+            <button
+              onClick={() => setActiveTab('high')}
+              className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 ${activeTab === 'high' ? 'bg-[#D4AF37] text-black shadow-lg shadow-[#D4AF37]/20' : 'text-zinc-400 hover:text-white'}`}
+            >
+              Luxury Edition (₹1k+)
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {products
-            .sort((a, b) => a.price - b.price)
-            .slice(0, 3)
-            .map((product, idx) => (
-              <TiltCard key={product.id} product={product} index={idx} />
-            ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 min-h-[500px]">
+          {displayedProducts.length > 0 ? (
+            displayedProducts.slice(0, 3).map((product, idx) => (
+              <TiltCard key={product.id} product={product} isBestSeller={bestSellersIds.includes(product.id)} />
+            ))
+          ) : (
+            <div className="col-span-full flex items-center justify-center h-64 border border-dashed border-white/10 rounded-3xl">
+              <p className="text-zinc-500 font-mono text-sm">No masterpieces found in this range.</p>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-16 flex justify-center">
+          <Link href="/collections">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-3 text-white group font-bold tracking-[0.2em] text-sm uppercase hover:text-[#D4AF37] transition-all cursor-pointer border-b border-white/20 pb-1 hover:border-[#D4AF37]"
+            >
+              View Full Catalog <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform text-[#D4AF37]" />
+            </motion.div>
+          </Link>
         </div>
       </div>
     </section>

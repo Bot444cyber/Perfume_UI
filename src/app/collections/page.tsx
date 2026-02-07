@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Filter, ChevronDown, Star, Heart, Eye, ArrowRight, Sparkles, Zap, Crown } from 'lucide-react';
 import Link from 'next/link';
@@ -11,14 +11,21 @@ import { products } from '@/data/products';
 
 const filters = [
     { title: "Collection", options: ["BYKAR Series"] },
-    { title: "Bottle ML", options: ["5ml", "30ml", "50ml", "100ml"] },
-    { title: "Price Range", options: ["Rs.100 - Rs.300", "Rs.300 - Rs.500", "Rs.500+"] },
+    { title: "Bottle ML", options: ["5ml", "18ml", "30ml", "50ml"] },
+    { title: "Price Range", options: ["Rs.250 - Rs.300", "Rs.550 - Rs.650", "Rs.750 - Rs.950", "Rs.1000+"] },
 ];
 
 const CollectionsPage = () => {
     const [activeSort, setActiveSort] = useState("Featured");
     const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
     const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+    const [allProducts, setAllProducts] = useState(products);
+
+    useEffect(() => {
+        // Shuffle products on mount for a professional random showcase
+        const shuffled = [...products].sort(() => 0.5 - Math.random());
+        setAllProducts(shuffled);
+    }, []);
 
     const toggleFilter = (option: string) => {
         if (selectedFilters.includes(option)) {
@@ -29,7 +36,7 @@ const CollectionsPage = () => {
     };
 
     // --- Filter Logic ---
-    const filteredProducts = products.filter(product => {
+    const filteredProducts = allProducts.filter(product => {
         if (selectedFilters.length === 0) return true;
 
         const priceFilters = selectedFilters.filter(f => f.includes("Rs."));
@@ -39,19 +46,19 @@ const CollectionsPage = () => {
         // Collection Filter
         const matchesCollection = collectionFilters.length === 0 ||
             collectionFilters.includes("BYKAR Series") ||
-            collectionFilters.includes(product.collection);
+            (product.collection && collectionFilters.includes(product.collection));
 
         // Price Filter
         const matchesPrice = priceFilters.length === 0 || priceFilters.some(f => {
-            if (f === "Rs.100 - Rs.300") return product.price >= 100 && product.price <= 300;
-            if (f === "Rs.300 - Rs.500") return product.price > 300 && product.price <= 500;
-            if (f === "Rs.500+") return product.price > 500;
+            if (f === "Rs.250 - Rs.300") return product.price >= 250 && product.price <= 300;
+            if (f === "Rs.550 - Rs.650") return product.price >= 550 && product.price <= 650;
+            if (f === "Rs.750 - Rs.950") return product.price >= 750 && product.price <= 950;
+            if (f === "Rs.1000+") return product.price >= 1000;
             return false;
         });
 
-        // Bottle Size (Mock Logic)
-        const bottleSize = product.price > 300 ? "30ml" : "5ml"; // Simplified mock logic
-        const matchesBottle = bottleFilters.length === 0 || bottleFilters.includes(bottleSize);
+        // Bottle Size (Real Logic)
+        const matchesBottle = bottleFilters.length === 0 || (product.ml && bottleFilters.includes(product.ml));
 
         return matchesCollection && matchesPrice && matchesBottle;
     });
@@ -61,7 +68,7 @@ const CollectionsPage = () => {
         if (activeSort === "Price: Low to High") return a.price - b.price;
         if (activeSort === "Price: High to Low") return b.price - a.price;
         if (activeSort === "Rating") return b.rating - a.rating;
-        return 0; // Featured
+        return 0; // Featured (already shuffled via allProducts)
     });
 
     return (

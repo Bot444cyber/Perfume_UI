@@ -5,19 +5,27 @@ export const contactData = [
     {
         icon: Mail,
         title: "Email",
-        value: "info@karfragrance.com",
-        href: "mailto:info@karfragrance.com"
+        value: "k.a.r.fragrance@gmail.com",
+        href: "mailto:k.a.r.fragrance@gmail.com"
     },
     {
         icon: Phone,
         title: "Phone",
-        value: "+92 3XXXXXXXX",
-        href: "tel:+923XXXXXXXX"
+        value: "03490514355",
+        href: "tel:03490514355",
+        type: 'phone'
+    },
+    {
+        icon: Phone,
+        title: "Phone",
+        value: "03144622845",
+        href: "tel:03144622845",
+        type: 'phone'
     },
     {
         icon: MapPin,
         title: "Address",
-        value: "Karachi, Pakistan",
+        value: "Jhang, Punjab | Pakistan",
         href: null
     }
 ];
